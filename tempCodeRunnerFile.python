@@ -1,0 +1,63 @@
+import requests
+import imdb
+
+ia =  imdb.IMDb()
+# response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=8fa926853ca455c49e3ec645167cd552'.format(285))
+# data = response.json()
+# print('https://image.tmdb.org/t/p' + data['poster_path'])
+# def fetch_poster(movie_title):
+#     search_results = ia.search_movie(movie_title)
+
+#     # Get the first search result (assuming it's the most relevant)
+#     if search_results:
+#         movie_id = search_results[0].movieID
+#         movie = ia.get_movie(movie_id)
+
+#         # Get the poster URL
+#         if 'cover url' in movie:
+#             return movie['cover url']
+import requests
+
+def fetch_poster(movie_title):
+    # Construct the OMDB API request URL
+    omdb_api_key = "YOUR_OMDB_API_KEY"  # Replace with your OMDB API key
+    omdb_url = f"http://www.omdbapi.com/?apikey=abc4c56c&t={movie_title}"
+
+    # Send a request to the OMDB API
+    response = requests.get(omdb_url)
+    data = response.json()
+
+    # Check if the response contains a valid poster URL
+    if "Poster" in data and data["Poster"] != "N/A":
+        return data["Poster"]
+    else:
+        return None
+
+# Example usage
+# movie_title = input("Enter the title of the movie: ")
+# poster_url = fetch_poster(movie_title)
+# if poster_url:
+#     print("Poster URL:", poster_url)
+# else:
+#     print("Poster not found for", movie_title)
+        
+print(fetch_poster('interstellar'))
+# import imdb
+# # Initialize the IMDb object
+# ia = imdb.IMDb()
+
+# # Function to get the poster URL of a movie
+# def get_movie_poster_url(movie_title):
+#     # Search for the movie
+#     search_results = ia.search_movie(movie_title)
+
+#     # Get the first search result (assuming it's the most relevant)
+#     if search_results:
+#         movie_id = search_results[0].movieID
+#         movie = ia.get_movie(582)
+
+#         # Get the poster URL
+#         # if 'cover url' in movie:
+#         return movie['cover url']
+# # print(get_movie_poster_url('interstellar'))
+# print(ia.search_movie('Independence day'))
